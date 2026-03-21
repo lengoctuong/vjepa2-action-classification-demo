@@ -53,6 +53,34 @@ python notebooks/action_classification_realtime.py
 
 A local URL (e.g., `http://127.0.0.1:7860`) and a public shareable link will be generated. Open the link in your browser to interact with the model via your webcam or video uploads.
 
+Dưới đây là phần nội dung Markdown được thiết kế riêng cho tính năng **Action Anticipation** để bạn sao chép và dán bổ sung vào file `README.md` hiện tại (có thể đặt ngay dưới phần *Running the Demo* cũ).
+
+## 🔮 Additional Demo: Action Anticipation (EPIC-KITCHENS-100)
+
+This repository also includes a script demonstrating **Action Anticipation**. Instead of classifying an ongoing action, this script analyzes a 4-second context window (32 frames at 8 FPS) to predict what action (Verb and Noun) will happen **1 second in the future**.
+
+**1. Download the Pre-trained Probe Weights**
+You need the specific Attentive Classifier probe trained on the EPIC-KITCHENS-100 dataset.
+
+```bash
+mkdir -p checkpoints
+wget https://dl.fbaipublicfiles.com/vjepa2/evals/ek100-vitg-384.pt -P checkpoints/
+```
+
+**2. Prepare Label Files**
+Ensure you have the EPIC-KITCHENS-100 class mappings in your root directory:
+* `EPIC_100_verb_classes.csv`
+* `EPIC_100_noun_classes.csv`
+
+**3. Run the Inference Script**
+
+Open the script, update the `video_path` variable to point to your target video, and run:
+
+```bash
+python notebooks/action_anticipation.py
+```
+The output will display the Top 5 predicted Verbs, Nouns, and combined Actions in the terminal.
+
 ## 📖 Citation
 
 If you find the underlying models or the original repository useful, please consider citing the original paper by Meta FAIR:
