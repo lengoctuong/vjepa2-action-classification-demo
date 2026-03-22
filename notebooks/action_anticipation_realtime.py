@@ -1,11 +1,4 @@
 import os
-
-# Chỉ dùng GPU index 4
-os.environ["CUDA_VISIBLE_DEVICES"] = "4"                                
-
-import sys
-sys.path.append("/home/dev/tuongln2/vjepa2")
-
 import subprocess
 import cv2
 import torch
@@ -137,13 +130,14 @@ class VJEPA_Anticipator:
                 
                 # Update Tqdm & Terminal Log
                 pbar.update(1)
-                tqdm.write(
-                    f"[Time {frame_idx/8:.1f}s] "
-                    f"Pred: {v_name} ({v_score:.1%}) {n_name} ({n_score:.1%})"
-                )
                 
                 # Update UI State (Dựa trên Threshold mới)
                 if v_score > self.verb_threshold and n_score > self.noun_threshold:
+                    tqdm.write(
+                        f"[Time {frame_idx/8:.1f}s] "
+                        f"Pred: {v_name} ({v_score:.1%}) {n_name} ({n_score:.1%})"
+                    )
+    
                     self.current_text = f"NEXT: {v_name} ({v_score:.1%}) {n_name} ({n_score:.1%})"
                     
                     # Logic màu sắc: Xanh nếu rất tự tin (>20%), Vàng nếu vừa vừa
@@ -195,7 +189,7 @@ class VJEPA_Anticipator:
 from transformers import AutoVideoProcessor, AutoModel # <--- Đổi ở đây
 from evals.action_anticipation_frozen.models import AttentiveClassifier
 
-device = "cuda:0"
+device = "cuda"
 EMB_VIDEO_SIZE = 384    
 HF_MODEL_NAME = f"facebook/vjepa2-vitg-fpc64-{EMB_VIDEO_SIZE}" 
 classifier_path = "checkpoints/ek100-vitg-384.pt"
@@ -235,7 +229,7 @@ anticipator = VJEPA_Anticipator(
     verb_map=id2verb,
     noun_map=id2noun,
     verb_threshold=0.10,    # Ngưỡng > 5%
-    noun_threshold=0.08,    # Ngưỡng > 2%
+    noun_threshold=0.05,    # Ngưỡng > 2%
 )
 
 # 3. Chạy xử lý
