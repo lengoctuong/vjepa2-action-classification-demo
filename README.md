@@ -77,7 +77,7 @@ Ensure you have the EPIC-KITCHENS-100 class mappings in your root directory:
 Open the script, update the `video_path` variable to point to your target video, and run:
 
 ```bash
-python notebooks/action_anticipation.py
+python notebooks/action_anticipation_realtime.py
 ```
 The output will display the Top 5 predicted Verbs, Nouns, and combined Actions in the terminal.
 
