@@ -7,6 +7,7 @@
 > **Disclaimer:** This repository is a modified clone of the official V-JEPA 2 repository. It is intended solely for demonstration purposes. All core architecture and pre-trained weights belong to the original authors at Meta FAIR.
 
 [ACTION CLASSIFICATION DEMO](https://www.youtube.com/watch?v=pZO0bIX4TWU)
+
 [ACTION ANTICIPATION DEMO](https://www.youtube.com/watch?v=DDxVwHVI2ng)
 
 ## 📌 About This Demo
